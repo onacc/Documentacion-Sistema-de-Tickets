@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Redmine · Envío de Tickets</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+
+<body class="page">
+  <!-- HEADBAR -->
+    <header class="topbar">
+        <div class="wrap">
+            <div class="brand">
+                <span class="logo" aria-hidden="true"></span>
+                <strong>Envío de Tickets por medio de API hacia Redmine</strong>
+            </div>
+            <nav class="meta">
+                <span>UNITEC</span>
+            </nav>
+        </div>
+    </header>
+
+  <main class="wrap content">
+    <section class="card">
+      <h1>Nueva petición</h1>
+
+        <form class="form" id="ticketForm">
+           <!--  <input type="hidden" id="project_id" name="project_id" value="proyecto-prueba" /> -->
+            <input type="hidden" id="tracker_id" name="tracker_id" value="" />
+            <input type="hidden" id="priority_id" name="priority_id" value="" />
+            <label class="field">
+              <span>Proyecto</span>
+              <select id="project_id" required>
+                <option value="" disabled selected>Cargando proyectos...</option>
+              </select>
+            </label>
+
+            <label class="field">
+                <span>Tipo</span>
+                <select id="tipo" required>
+                <option value="" disabled selected>Selecciona un tipo</option>
+                <option value="error">Errores</option>
+                <option value="task">Tareas</option>
+                <option value="support">Soporte</option>
+                </select>
+            </label>
+
+            <label class="field">
+                <span>Asunto</span>
+                <input id="subject" type="text" placeholder="Título corto del ticket" required />
+            </label>
+
+            <label class="field">
+                <span>Descripción</span>
+                <textarea id="description" rows="6" placeholder="Describe el problema o solicitud"></textarea>
+            </label>
+
+            <div class="actions">
+                <button type="button" class="btn primary" id="btnEnviar">Enviar ticket </button>
+                <button type="reset" class="btn ghost">Limpiar</button>
+            </div>
+            <div id="msg" class="msg" style="display:none;"></div>
+
+       </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bottombar">
+    <div class="wrap">
+      <span class="class">Gobernabilidad de Tecnologías de Información · UNITEC</span>
+    </div>
+  </footer>
+
+  <script>
+  const trackerPorTipo = {
+    error: 1,
+    task: 2,
+    support: 3
+  };
+
+  const prioridadPorTipo = {
+    error: 3,
+    task: 2,
+    support: 2
+  };
+
+  const tipo = document.getElementById('tipo');
+  const tracker_id = document.getElementById('tracker_id');
+  const priority_id = document.getElementById('priority_id');
+
+  function syncInternals() {
+    const v = tipo.value;
+    tracker_id.value = trackerPorTipo[v] ?? "";
+    priority_id.value = prioridadPorTipo[v] ?? 2;
+  }
+
+  tipo.addEventListener('change', syncInternals);
+  syncInternals();
+</script>
+  <script src="app.js" defer></script>
+</body>
+</html>
