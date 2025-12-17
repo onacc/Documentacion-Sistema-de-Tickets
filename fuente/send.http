@@ -1,4 +1,14 @@
 ### Test API redmine
 @key = ...
 ### Send issue
-POST https://npr3s.com/control/projects/...
+POST http://localhost:3000/api/issues
+Content-Type: application/json
+
+{
+  "project_id": "proyecto-prueba",
+  "tracker_id": 2,
+  "status_id": 1,
+  "subject": "Nueva funcionalidad",
+  "description": "Pasos para reproducir nueva ventana...",
+  "priority_id": 2
+}

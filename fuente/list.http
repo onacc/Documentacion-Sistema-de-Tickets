@@ -1,4 +1,7 @@
 ### Test API redmine
+@baseUrl = http://localhost:3000/api
 @key = ...
 ### List issues
-GET https://npr3s.com/control/projects/...
+GET {{baseUrl}}/projects
+
+GET {{baseUrl}}/issues
